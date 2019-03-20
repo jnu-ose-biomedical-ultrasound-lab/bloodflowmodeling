@@ -9,10 +9,11 @@
  
  % Details: This is the primary function to run simulations. 
  %          Simulate time-dependent particle motion, and RBC aggregation under sinusoidal pulsatile flow. 
+ %			Our repository is located at: https://github.com/jnu-ose-biomedical-ultrasound-lab/bloodflowmodeling
 
  % If you use our code, please cite our paper:
  % LEE, Cheong-Ah; KONG, Qi; PAENG, Dong-Guk. Depletion-model-based numerical simulation of the kinetics of red blood cell aggregation under sinusoidal pulsatile flow. Biorheology, 2018, Preprint: 1-13.
- 
+ % 
 %--------------------------------------------------------------------------
 
 %% particle motion dependent on time and RBC aggregation under sinusoidal pulsatile flow 
