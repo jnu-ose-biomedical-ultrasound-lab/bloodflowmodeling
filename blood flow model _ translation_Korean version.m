@@ -90,7 +90,7 @@ for T=1:5:10000*period;
     P_R(Ovx_indey2,2)=P_R(Ovx_indey2,2)+Bound_y-R;   
    %% This part calculate new position of the RBCs
     velocity_particle   = (dv*sin(wave_angle*(T_num)-wave_number*P_R(:,1)+in_t)+v_mean).*(1-(4.*(P_R(:,2).^2)./(Bound_y^2)));    
-    velocity_field      = (dv*sin(wave_angle*(T_num)-wave_number*P_R_x(1,:)+in_t)+v_mean)'*(1-(4.*(P_R_y(:,1).^2)./(Bound_y^2)))';   % velocity field [m/s]
+    velocity_field      = (dv*sin(wave_angle*(T_num)-wave_number*P_R_x(1,:)+in_t)+v_mean).*(1-(4.*(P_R_y(:,1).^2)./(Bound_y^2)));   % velocity field [m/s]
    %% calculate net force(hydro dynamic force, aggregation force, elastic force)
     uu= velocity_particle';                                    % particle's velocity
     [d_R FA_un d_RF]=GetMD(P_R,Bound_x,R);                     % Get the distance and direction among particles
@@ -105,10 +105,10 @@ for T=1:5:10000*period;
     once_t=once_t+t;                                         % time step [sec]   
      
    %% the part indicate the velocity, acceleration, shear rate in the ROI rage 
-    acceleration =  (dv*wave_angle*cos(wave_angle*(T_num)-wave_number*P_R_x(1,:)+in_t))'*(1-(4.*(P_R_y(:,1).^2)./(Bound_y^2)))';  % acceleration field [m/s2]
+    acceleration =  (dv*wave_angle*cos(wave_angle*(T_num)-wave_number*P_R_x(1,:)+in_t)).*(1-(4.*(P_R_y(:,1).^2)./(Bound_y^2)));  % acceleration field [m/s2]
     win_acc_data = unique(acceleration); win_acc_data = sort(win_acc_data); 
     Acc_mean = mean(win_acc_data);
-    shearrate = ((dv*sin(wave_angle*(T_num)-wave_number*P_R_x(1,:)+in_t)+v_mean)'*((8.*abs(P_R_y(:,1))./((Bound_y)^2)))');        % shear rate in the y direction
+    shearrate = ((dv*sin(wave_angle*(T_num)-wave_number*P_R_x(1,:)+in_t)+v_mean).*((8.*abs(P_R_y(:,1))./((Bound_y)^2))));        % shear rate in the y direction
 %   shearrate_x = (-dv*wave_number*cos(wave_angle*(T_num)-wave_number*P_R_x(1,:)+in_t)).*(1-(4.*(P_R_y(:,1).^2)./(Bound_y^2)));  % shear rate in the x direction
 %   shearrate_magnitude = sqrt(shearrate_x.^2+shearrate_y.^2);                                                                   % magnitude field of shear rate 
     win_shear_data = unique(shearrate); win_shear_data = sort(win_shear_data);
@@ -129,7 +129,7 @@ for T=1:5:10000*period;
     %% Calculation the velocity, acceleration, shear rate of the each particles
         particle_acc = (dv*wave_angle*cos(wave_angle*(T_num)-wave_number*P_R(AGG_RBC_No,1)+in_t)).*(1-(4.*(P_R(AGG_RBC_No,2).^2)./(Bound_y^2)));
         particle_sh = ((dv*sin(wave_angle*(T_num)-wave_number*P_R(AGG_RBC_No,1)+in_t)+v_mean).*((8.*abs(P_R(AGG_RBC_No,2))./((Bound_y)^2))));    
-     %% Process1
+     %% Process1 - calculation of the RBC aggregation in the rectangular ROI
         ROI1 = 1.5e-4 ;
         ROI2 = 2e-4;
         RBCs_inROI = find(P_R_x >=ROI1 &P_R_x<ROI2);
